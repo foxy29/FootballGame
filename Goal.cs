@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,14 +9,15 @@ namespace homework
     public class Goal
     {
         private int minute;
-        private Striker player;
+        private FootballPlayer player;
 
-        public int Minute { get; }
-        public Striker Player { get; }
+        public int Minute { get; set; }
+        public FootballPlayer Player { get; set; }
 
-        public Goal()
+        public Goal( int minute, FootballPlayer player)
         {
-              
+            Minute = minute;
+            Player = player;
         }
     }
 }
