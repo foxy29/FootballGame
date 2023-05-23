@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,14 +13,15 @@ namespace homework
         {
            
         }
-        private void Strike()
+        public override int Attack()
         {
+            int defendScore = 12;
+            if (RandomLuck.IsLucky(70))
+            {
+                return defendScore++;
+            }
+            return defendScore;
 
-        }
-
-        public override void Play()
-        {
-            Strike();
         }
     }
 }
