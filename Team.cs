@@ -34,9 +34,10 @@ namespace homework
             }
         }
 
-        public Team()
+        public Team(Coach coach, List<FootballPlayer> players)
         {
-            FootballPlayers = new List<FootballPlayer>();
+            Coach = coach;
+            FootballPlayers = players; ;
         }
 
     }
