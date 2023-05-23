@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -35,10 +35,18 @@ namespace homework
             Number = number;
             Height = height;
         }
-        public virtual bool Play()
+        public virtual int Attack()
         {
-            return false;
+            int attackScore = 10;
+            return attackScore;
         }
+
+        public virtual int Defend()
+        {
+            int defendScore = 10;
+            return defendScore;
+        }
+
         protected bool IsValidDouble(double num)
         {
             if ( num > 0) { return true; }
