@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,21 +13,21 @@ namespace homework
         {
             
         }
-        
-        private void GoalKeep()
+        public override int Defend()
         {
-            /*
-            bool isThereGoal = false;
-            if (!RandomLuckcs.IsLucky(50))
+            int defendScore = 12;
+            if (RandomLuck.IsLucky(80))
             {
-                return isThereGoal = true;
+                return defendScore++;
             }
-            //return is;*/
-        }
+            return defendScore;
 
-        public override bool Play()
+        }
+        public override int Attack()
         {
-            GoalKeep();
+            int attackScore = 0;
+            return attackScore;
+
         }
     }
 }
