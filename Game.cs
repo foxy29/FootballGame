@@ -1,6 +1,7 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Mail;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -38,8 +39,8 @@ namespace homework
         public Referee Referee { get; private set; }
         public Referee Assistent1 { get; private set; }
         public Referee Assistent2 { get; private set; }
-        public List<Goal> Goals { get;}
-        public string Result { get; }
+        public List<Goal> Goals { get; private set; }
+        public string Result { get; private set; }
         public Team Winner
         {
             get
@@ -63,23 +64,62 @@ namespace homework
         }
         public Team PlayFootball()
         {
-            Team teamA = Team1;
-            Team teamB = Team2;
-            Striker goalMaker;
-            Team winner;
+            
+            FootballPlayer attacker = GetRandomPlayer(Team1.FootballPlayers);
+            FootballPlayer defender = GetRandomPlayer(Team2.FootballPlayers);
+            bool team1HasBall = true;
+            List<Goal> goalsTeam1 = new List<Goal>();
+            List<Goal> goalsTeam2 = new List<Goal>();
             int timer = 0;
-            int goalMinute = 0;
             do
             {
-                FootballPlayer playerA = GetRandomPlayer(teamA.FootballPlayers);
-                FootballPlayer playerB = GetRandomPlayer(teamA.FootballPlayers);
-                if(playerA is Striker && playerB is Goalkeeper)
+                int scoreA = attacker.Attack();
+                int scoreD = defender.Defend();
 
+                if (scoreA > scoreD) 
+                { 
+                    team1HasBall = true; 
+                }
+                else if(scoreA < scoreD) 
+                { 
+                    team1HasBall = false;
+                    FootballPlayer temp = attacker;
+                    attacker = defender;
+                    defender = temp;
+                }
 
+                if (attacker is Striker && defender is Goalkeeper)
+                {
+                    if(scoreA > scoreD)
+                    {
+                        Goal goal = new Goal(timer, attacker);
+                        Goals.Add(goal);
+                        if(team1HasBall)
+                        {
+                            goalsTeam1.Add(goal);
+                        }
+                        else
+                        {
+                            goalsTeam2.Add(goal);
+                        }
+                    }
+                    
+                }
                 timer++;
+
             }
             while (timer == 90);
 
+            this.Result = $"Team 1: {goalsTeam1.Count} - {goalsTeam2.Count} : Team 2";
+            Team winner;
+            if(goalsTeam1.Count > goalsTeam2.Count)
+            {
+                winner = Team1;
+            }
+            else
+            {
+                winner = Team2;
+            }
 
             return winner;
         }
